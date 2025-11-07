@@ -49,9 +49,6 @@ ENV PATH="/opt/venv/bin:${PATH}"
 # Install comfy-cli + dependencies needed by it to install ComfyUI
 RUN uv pip install comfy-cli pip setuptools wheel
 
-# Install awscli for R2 sync
-RUN pip install awscli
-
 # Install ComfyUI
 RUN if [ -n "${CUDA_VERSION_FOR_COMFY}" ]; then \
       /usr/bin/yes | comfy --workspace /comfyui install --version "${COMFYUI_VERSION}" --cuda-version "${CUDA_VERSION_FOR_COMFY}" --nvidia; \
@@ -74,7 +71,12 @@ ADD src/extra_model_paths.yaml ./
 WORKDIR /
 
 # Install Python runtime dependencies for the handler
-RUN uv pip install runpod requests websocket-client
+RUN uv pip install runpod requests websocket-client boto3
+
+# Add application code and scripts
+# sync_r2.py 파일을 컨테이너 루트로 복사
+COPY src/sync_r2.py /sync_r2.py
+ADD src/start.sh handler.py test_input.json ./
 
 # Add application code and scripts
 ADD src/start.sh handler.py test_input.json ./
