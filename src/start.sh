@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+echo "Starting model sync from R2..."
+aws s3 sync s3://$BUCKET_NAME /workspace/comfyui/models --endpoint-url $BUCKET_ENDPOINT_URL
+echo "Model sync finished."
+
 # Use libtcmalloc for better memory management
 TCMALLOC="$(ldconfig -p | grep -Po "libtcmalloc.so.\d" | head -n 1)"
 export LD_PRELOAD="${TCMALLOC}"
