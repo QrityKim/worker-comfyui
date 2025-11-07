@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -e # 명령어 실행 중 에러가 발생하면 스크립트를 즉시 중단 (디버깅에 필수)
 
+echo "=== DEBUG: ENV VAR CHECK ==="
+echo "BUCKET_NAME: '$BUCKET_NAME'"
+echo "ENDPOINT: '$BUCKET_ENDPOINT_URL'"
+echo "ACCESS_KEY: '${BUCKET_ACCESS_KEY_ID:0:5}***'" # 보안을 위해 앞 5자리만 출력
+echo "============================"
+
 echo "--- STARTING CONTAINER ---"
 
 # 1. 모델 동기화 경로 수정 (/workspace 제거)
