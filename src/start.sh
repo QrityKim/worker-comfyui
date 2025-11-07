@@ -3,11 +3,9 @@ set -e # 명령어 실행 중 에러가 발생하면 스크립트를 즉시 중�
 
 echo "--- STARTING CONTAINER ---"
 
-# 1. 모델 동기화 경로 수정 (/workspace 제거)
-echo "Starting model sync from R2..."
-# /comfyui/models 경로가 실제 ComfyUI가 모델을 찾는 위치입니다.
-aws s3 sync s3://$BUCKET_NAME /comfyui/models --endpoint-url $BUCKET_ENDPOINT_URL
-echo "Model sync finished."
+echo "Starting model sync from R2 using Boto3..."
+python3 -u /sync_r2.py
+echo "Model sync script finished."
 
 # Use libtcmalloc for better memory management
 TCMALLOC="$(ldconfig -p | grep -Po "libtcmalloc.so.\d" | head -n 1)"
