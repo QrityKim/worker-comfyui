@@ -4,7 +4,7 @@ set -e # 명령어 실행 중 에러가 발생하면 스크립트를 즉시 중�
 echo "--- STARTING CONTAINER ---"
 
 echo "Starting model sync from R2 using Boto3..."
-python3 -u /sync_r2.py
+python -u /sync_r2.py
 echo "Model sync script finished."
 
 # Use libtcmalloc for better memory management
