@@ -2,6 +2,7 @@ import os
 import boto3
 from botocore.client import Config
 
+
 # 1. 환경 변수 로드 및 확인
 ENDPOINT_URL = os.environ.get("https://c5731df4e6f9d7b2c586ee56d2936da0.r2.cloudflarestorage.com")
 ACCESS_KEY = os.environ.get("59bf733b612098e892e648c38a8b0862")
